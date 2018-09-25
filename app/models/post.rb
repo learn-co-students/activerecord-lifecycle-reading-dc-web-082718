@@ -1,8 +1,15 @@
 class Post < ActiveRecord::Base
 
   belongs_to :author
-  validate :is_title_case 
+  validate :is_title_case
 
+  #validation happens before save
+  #modify the model to fit your standard
+  before_validation :make_title_case
+
+  #save called after validation
+    #save do something that doesnt modify the model
+    # before_save :email_author_about_post
   private
 
   def is_title_case
